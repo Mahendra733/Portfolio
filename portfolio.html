@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origanti Mahendra - AI/ML Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links li {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links li:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-links li::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-links li:hover::before {
+            left: 100%;
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding: 6rem 2rem 2rem;
+            display: none;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Home Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            height: 90vh;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.8s both;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Sections */
+        .content-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .content-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4ecdc4;
+        }
+
+        .card p {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* About Section Specific */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            transform: scale(1.05);
+        }
+
+        /* Progress bars for skills */
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress {
+            height: 8px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 10px;
+            transition: width 2s ease;
+            width: 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Project Links */
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Achievement badges */
+        .achievement-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #333;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin: 0.2rem;
+        }
+
+        /* Skills section enhanced */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-category h4 {
+            color: #4ecdc4;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-item {
+            padding: 0.4rem 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-item:hover {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            transform: scale(1.05);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                padding: 1rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+            }
+
+            .hamburger span {
+                display: block;
+                width: 25px;
+                height: 3px;
+                background: white;
+                margin: 5px 0;
+                transition: 0.3s;
+            }
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Floating particles background */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: floatParticle 6s linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Mahendra</div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li onclick="showSection('home')">Home</li>
+                <li onclick="showSection('about')">About</li>
+                <li onclick="showSection('education')">Education</li>
+                <li onclick="showSection('internships')">Internships</li>
+                <li onclick="showSection('certificates')">Certificates</li>
+                <li onclick="showSection('projects')">Projects</li>
+                <li onclick="showSection('achievements')">Achievements</li>
+                <li onclick="showSection('activities')">Activities</li>
+                <li onclick="showSection('contact')">Contact</li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="container">
+            <div class="hero">
+                <h1>Origanti Mahendra</h1>
+                <div class="subtitle">AI/ML Engineer & Full Stack Developer</div>
+                <p>Passionate Computer Science student specializing in Artificial Intelligence and Machine Learning. I love building innovative solutions using cutting-edge technologies and contributing to meaningful projects that make a real impact.</p>
+                <a href="#" class="cta-button" onclick="showSection('about')">Explore My Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="content-header">
+                <h2>About Me</h2>
+                <p>Get to know more about my journey and expertise</p>
+            </div>
+            <div class="about-content">
+                <div class="profile-image">🤖</div>
+                <div>
+                    <h3>Hello! I'm Origanti Mahendra</h3>
+                    <p>Currently pursuing B.Tech in Computer Science (AI & ML) at Vignan University with a CGPA of 8.38/10. I'm passionate about leveraging artificial intelligence and machine learning to solve real-world problems. With hands-on experience in data science, deep learning, and full-stack development, I strive to create innovative solutions that make a meaningful impact.</p>
+                    
+                    <!-- Enhanced Skills Section -->
+                    <h4 style="margin-top: 2rem; margin-bottom: 1rem; color: #4ecdc4;">Technical Skills</h4>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Programming Languages</h4>
+                            <div class="skill-items">
+                                <span class="skill-item">Python</span>
+                                <span class="skill-item">C</span>
+                                <span class="skill-item">C++</span>
+                                <span class="skill-item">Java</span>
+                                <span class="skill-item">SQL</span>
+                                <span class="skill-item">JavaScript</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>AI/ML & Data Science</h4>
+                            <div class="skill-items">
+                                <span class="skill-item">TensorFlow</span>
+                                <span class="skill-item">Keras</span>
+                                <span class="skill-item">PyTorch</span>
+                                <span class="skill-item">Hugging Face</span>
+                                <span class="skill-item">Deep Learning</span>
+                                <span class="skill-item">CNN</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Web Technologies</h4>
+                            <div class="skill-items">
+                                <span class="skill-item">HTML</span>
+                                <span class="skill-item">CSS</span>
+                                <span class="skill-item">React.js</span>
+                                <span class="skill-item">Node.js</span>
+                                <span class="skill-item">Express.js</span>
+                                <span class="skill-item">MongoDB</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Tools & Platforms</h4>
+                            <div class="skill-items">
+                                <span class="skill-item">Git/GitHub</span>
+                                <span class="skill-item">VS Code</span>
+                                <span class="skill-item">Google Colab</span>
+                                <span class="skill-item">Jupyter</span>
+                                <span class="skill-item">Power BI</span>
+                                <span class="skill-item">Streamlit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <div class="progress-label">
+                            <span>AI/ML Development</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" data-width="90"></div>
+                        </div>
+
+                        <div class="progress-label">
+                            <span>Data Science & Analytics</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" data-width="85"></div>
+                        </div>
+
+                        <div class="progress-label">
+                            <span>Full Stack Development</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" data-width="80"></div>
+                        </div>
+
+                        <div class="progress-label">
+                            <span>Problem Solving & DSA</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" data-width="85"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Internships Section -->
+    <section id="internships" class="section">
+        <div class="container">
+            <div class="content-header">
+                <h2>Internships</h2>
+                <p>Professional experience and hands-on learning opportunities</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Data Science Intern</h3>
+                    <p><strong>SURE TRUST - Remote</strong> | Jan 2025 – Present</p>
+                    <p>Analyzing data using SQL and creating comprehensive dashboards in Power BI to support strategic decision-making. Built efficient Python pipelines to automate data collection and cleaning processes. Developed machine learning models for trend prediction and business insights.</p>
+                    <div class="skills" style="margin-top: 1rem;">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">Machine Learning</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Workshop Participant</h3>
+                    <p><strong>GENAI - Generative AI Workshop</strong> | Dec 2024</p>
+                    <p>Selected for hands-on workshop on Generative AI technologies and applications. Worked with pretrained models and Hugging Face libraries to generate and utilize vector embeddings. Gained expertise in data preparation, model training, and evaluation best practices.</p>
+                    <div class="skills" style="margin-top: 1rem;">
+                        <span class="skill-tag">Generative AI</span>
+                        <span class="skill-tag">Hugging Face</span>
+                        <span class="skill-tag">Vector Embeddings</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Full Stack Web Development</h3>
+                    <p><strong>Bytexl - MERN Stack Certification</strong> | 2024</p>
+                    <p>Completed comprehensive training in MERN Stack development. Developed dynamic web applications using MongoDB, Express.js, React, and Node.js with modern development practices and industry standards.</p>
+                    <div class="skills" style="margin-top: 1rem;">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Express.js</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <div class="content-header">
+                <h2>Education</h2>
+                <p>My academic journey and qualifications</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>B.Tech Computer Science (AI & ML)</h3>
+                    <p><strong>Vignan's Foundation for Science, Technology & Research</strong> | July 2022 – Present</p>
+                    <p>Currently pursuing Bachelor of Technology with specialization in Artificial Intelligence and Machine Learning. Maintaining an excellent CGPA of 8.38/10.0 with consistent distinction across core subjects.</p>
+                    <div class="achievement-badge">CGPA: 8.38/10</div>
+                    <div class="achievement-badge">AI & ML Specialization</div>
+                </div>
+                <div class="card">
+                    <h3>Intermediate Education (MPC)</h3>
+                    <p><strong>Narayana Junior College</strong> | May 2020 – June 2022</p>
+                    <p>Completed intermediate education with Mathematics, Physics, and Chemistry stream. Achieved outstanding academic performance with distinction in all core subjects.</p>
+                    <div class="achievement-badge">97.2%</div>
+                    <div class="achievement-badge">MPC Stream</div>
+                </div>
+                <div class="card">
+                    <h3>Secondary School Certificate (SSC)</h3>
+                    <p><strong>A.P.M. School</strong> | June 2019 – April 2020</p>
+                    <p>Completed secondary education with excellent academic performance. Built a strong foundation across all subjects with distinction in comprehensive evaluation.</p>
+                    <div class="achievement-badge">91.6%</div>
+                    <div class="achievement-badge">All Subjects Distinction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="section">
+        <div class="container">
+            <div class="content-header">
+                <h2>Certificates</h2>
+                <p>Professional certifications and achievements</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Elite-Plus-Silver Certificate</h3>
+                    <p><strong>NPTEL - Learning Analytics Tools</strong> | 2024</p>
+                    <p>Awarded Elite-Plus-Silver certificate in Learning Analytics Tools, demonstrating proficiency in educational data analysis and visualization techniques.</p>
+                    <div class="achievement-badge">Elite-Plus-Silver</div>
+                </div>
+                <div class="card">
+                    <h3>Programming & Data Structures</h3>
+                    <p><strong>NPTEL - Python Certification</strong> | 2024</p>
+                    <p>Successfully completed comprehensive course on Programming, Data Structures, and Algorithms using Python with excellent performance.</p>
+                    <div class="achievement-badge">NPTEL Certified</div>
+                </div>
+                <div class="card">
+                    <h3>MERN Stack Development</h3>
+                    <p><strong>Bytexl - Full Stack Certification</strong> | 2024</p>
+                    <p>Certified in Full Stack Web Development using MERN Stack. Developed dynamic web applications with modern frameworks and best practices.</p>
+                    <div class="achievement-badge">Full Stack Certified</div>
+                </div>
+                <div class="card">
+                    <h3>Cambridge English Certification</h3>
+                    <p><strong>Cambridge B1 Level PET</strong> | 2024</p>
+                    <p>Achieved Cambridge B1 Level Certification in Preliminary English Test, demonstrating strong communication skills in English.</p>
+                    <div class="achievement-badge">B1 Level</div>
+                </div>
+                <div class="card">
+                    <h3>Generative AI Workshop</h3>
+                    <p><strong>GENAI - Hands-on Training</strong> | Dec 2024</p>
+                    <p>Participated in intensive workshop on Generative AI with practical experience in Hugging Face libraries and vector embeddings.</p>
+                    <div class="achievement-badge">GenAI Specialist</div>
+                </div>
+                <div class="card">
+                    <h3>ZOHO Low-Code Workshop</h3>
+                    <p><strong>ZOHO Corporation</strong> | 2024</p>
+                    <p>Attended comprehensive workshop on low-code development platforms and modern application development methodologies.</p>
+                    <div class="achievement-badge">Low-Code Development</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="content-header">
+                <h2>Projects</h2>
+                <p>Some of my recent work and contributions</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Pneumonia Detection using Deep Learning</h3>
+                    <p><strong>CNN, TensorFlow, Medical AI</strong></p>
+                    <p>Developed an advanced deep learning model using Convolutional Neural Networks to detect pneumonia from chest X-ray images. Achieved impressive accuracy of 93% with robust data preprocessing and model optimization techniques.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">🚀 Live Demo</a>
+                        <a href="#" class="project-link">📱 GitHub</a>
+                    </div>
+                    <div class="achievement-badge">93% Accuracy</div>
+                    <div class="achievement-badge">Medical AI</div>
+                </div>
+                <div class="card">
+                    <h3>PDF Knowledge Chatbot</h3>
+                    <p><strong>Hugging Face, Streamlit, NLP</strong></p>
+                    <p>Built an intelligent document assistant that analyzes uploaded PDF files using Hugging Face embeddings and language models. Features a user-friendly Streamlit interface for document upload and natural language conversation.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">🚀 Live Demo</a>
+                        <a href="#" class="project-link">📱 GitHub</a>
+                    </div>
+                    <div class="achievement-badge">NLP Powered</div>
+                    <div class="achievement-badge">Document AI</div>
+                </div>
+                <div class="card">
+                    <h3>Data Analytics Dashboard</h3>
+                    <p><strong>Python, Power BI, SQL</strong></p>
+                    <p>Created comprehensive data analytics dashboard with automated data collection pipeline. Implemented real-time data visualization and business intelligence features for decision support systems.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">🚀 Live Demo</a>
+                        <a href="#" class="project-link">📱 GitHub</a>
+                    </div>
+                    <div class="achievement-badge">Real-time Analytics</div>
+                </div>
+                <div class="card">
+                    <h3>MERN Stack Web Application</h3>
+                    <p><strong>React, Node.js, MongoDB, Express</strong></p>
+                    <p>Developed dynamic web application using MERN stack with modern UI/UX design, user authentication, and responsive design principles. Features include CRUD operations and real-time updates.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">🚀 Live Demo</a>
+                        <a href="#" class="project-link">📱 GitHub</a>
+                    </div>
+                    <div class="achievement-badge">Full Stack</div>
+                </div>
+                <div class="card">
+                    <h3>Machine Learning Prediction Models</h3>
+                    <p><strong>Python, Scikit-learn, TensorFlow</strong></p>
+                    <p>Implemented various machine learning algorithms for trend prediction and data analysis. Features automated model selection, hyperparameter tuning, and performance evaluation metrics.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">🚀 Live Demo</a>
+                        <a href="#" class="project-link">📱 GitHub</a>
+                    </div>
+                    <div class="achievement-badge">ML Algorithms</div>
+                </div>
+                <div class="card">
+                    <h3>Computer Vision Applications</h3>
+                    <p><strong>OpenCV, Python, Deep Learning</strong></p>
+                    <p>Developed computer vision applications for image processing and analysis. Implemented object detection, image classification, and feature extraction using modern deep learning techniques.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">🚀 Live Demo</a>
+                        <a href="#" class="project-link">📱 GitHub</a>
+                    </div>
+                    <div class="achievement-badge">Computer Vision</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section">
+        <div class="container">
+            <div class="content-header">
+                <h2>Achievements</h2>
+                <p>Recognition and accomplishments throughout my journey</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>🎯 GRE Excellence</h3>
+                    <p><strong>Educational Testing Service</strong></p>
+                    <p>Achieved an outstanding GRE score of 324 with an Analytical Writing Assessment (AWA) score of 3.0, demonstrating strong analytical and reasoning skills.</p>
+                    <div class="achievement-badge">GRE: 324</div>
+                    <div class="achievement-badge">AWA: 3.0</div>
+                </div>
+                <div class="card">
+                    <h3>⭐ Top Academic Performer</h3>
+                    <p><strong>Vignan University - AIML Department</strong></p>
+                    <p>Consistently ranked among the top performers in the Artificial Intelligence and Machine Learning Department across all semesters, maintaining excellent academic standards.</p>
+                    <div class="achievement-badge">Top Performer</div>
+                    <div class="achievement-badge">CGPA: 8.38</div>
+                </div>
+                <div class="card">
+                    <h3>🏆 Elite-Plus-Silver Certificate</h3>
+                    <p><strong>NPTEL - Learning Analytics</strong></p>
+                    <p>Awarded the prestigious Elite-Plus-Silver certificate in Learning Analytics Tools, showcasing excellence in educational data analysis and advanced analytics.</p>
+                    <div class="achievement-badge">Elite-Plus-Silver</div>
+                    <div class="achievement-badge">NPTEL</div>
+                </div>
+                <div class="card">
+                    <h3>📊 Outstanding Academic Record</h3>
+                    <p><strong>Intermediate Education</strong></p>
+                    <p>Achieved exceptional academic performance with 97.2% in Intermediate (MPC stream), demonstrating strong foundation in Mathematics, Physics, and Chemistry.</p>
+                    <div class="achievement-badge">97.2%</div>
+                    <div class="achievement-badge">MPC Excellence</div>
+                </div>
+                <div class="card">
+                    <h3>🎓 SSC Distinction</h3>
+                    <p><strong>Secondary Education</strong></p>
+                    <p>Secured 91.6% in Secondary School Certificate with distinction in all subjects, building a strong academic foundation for higher studies.</p>
+                    <div class="achievement-badge">91.6%</div>
+                    <div class="achievement-badge">All Subjects Distinction</div>
+                </div>
+                <div class="card">
+                    <h3>🤖 AI/ML Specialization</h3>
+                    <p><strong>Deep Learning & Computer Vision</strong></p>
+                    <p>Successfully developed multiple AI/ML projects including pneumonia detection with 93% accuracy, showcasing expertise in medical AI and computer vision.</p>
+                    <div class="achievement-badge">93% Accuracy</div>
+                    <div class="achievement-badge">Medical AI</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Extra-curricular Activities Section -->
+    <section id="activities" class="section">
+        <div class="container">
+            <div class="content-header">
+                <h2>Extra-curricular Activities</h2>
+                <p>Leadership, sports achievements, and community involvement</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>🏏 Cricket Championships</h3>
+                    <p><strong>Inter-college Tournaments</strong> | 2023, 2024</p>
+                    <p>Reached semifinals twice in competitive inter-college cricket tournaments, demonstrating consistent athletic performance and teamwork skills over consecutive years.</p>
+                    <div class="achievement-badge">Semifinals 2023</div>
+                    <div class="achievement-badge">Semifinals 2024</div>
+                </div>
+                <div class="card">
+                    <h3>🥈 Kabaddi Competition Winner</h3>
+                    <p><strong>Narayana School</strong> | Intra-school Competition</p>
+                    <p>Secured 2nd place in intra-school kabaddi competition, showcasing athletic prowess and competitive spirit in traditional Indian sports.</p>
+                    <div class="achievement-badge">2nd Place</div>
+                    <div class="achievement-badge">Team Sport</div>
+                </div>
+                <div class="card">
+                    <h3>🎤 Event Anchor & Host</h3>
+                    <p><strong>Vignan University</strong> | 7 Events</p>
+                    <p>Successfully anchored 7 major events at Vignan University, developing strong public speaking skills and stage presence while engaging diverse audiences.</p>
+                    <div class="achievement-badge">7 Events</div>
+                    <div class="achievement-badge">Public Speaking</div>
+                </div>
+                <div class="card">
+                    <h3>🌐 Language Proficiency</h3>
+                    <p><strong>Cambridge English Certification</strong></p>
+                    <p>Achieved Cambridge B1 Level certification in Preliminary English Test, demonstrating strong communication skills and international language competency.</p>
+                    <div class="achievement-badge">B1 Level</div>
+                    <div class="achievement-badge">Cambridge Certified</div>
+                </div>
+                <div class="card">
+                    <h3>🔬 Workshop Participation</h3>
+                    <p><strong>Technical Skill Development</strong></p>
+                    <p>Actively participated in multiple technical workshops including Generative AI, ZOHO Low-Code Development, enhancing practical skills and staying updated with industry trends.</p>
+                    <div class="achievement-badge">GenAI Workshop</div>
+                    <div class="achievement-badge">ZOHO Workshop</div>
+                </div>
+                <div class="card">
+                    <h3>💻 Coding & Development</h3>
+                    <p><strong>Personal Projects & Learning</strong></p>
+                    <p>Continuously working on personal coding projects, contributing to open-source initiatives, and maintaining active GitHub profile with innovative AI/ML solutions.</p>
+                    <div class="achievement-badge">GitHub Active</div>
+                    <div class="achievement-badge">AI/ML Projects</div>
+                </div>
+                <div class="card">
+                    <h3>🎯 Competitive Programming</h3>
+                    <p><strong>Algorithm & Data Structures</strong></p>
+                    <p>Regular practice of competitive programming problems, focusing on algorithm optimization and data structure implementation using multiple programming languages.</p>
+                    <div class="achievement-badge">DSA Expert</div>
+                    <div class="achievement-badge">Multi-language</div>
+                </div>
+                <div class="card">
+                    <h3>📚 Continuous Learning</h3>
+                    <p><strong>Skill Development</strong></p>
+                    <p>Committed to lifelong learning through online courses, certifications, and hands-on projects. Always exploring emerging technologies and industry best practices.</p>
+                    <div class="achievement-badge">Self-learner</div>
+                    <div class="achievement-badge">Tech Explorer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="content-header">
+                <h2>Get In Touch</h2>
+                <p>Let's discuss your next project or opportunity</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>📧 Email</h3>
+                    <p>mahendrachowdhary733@gmail.com</p>
+                    <p>Feel free to reach out for collaborations, opportunities, or just to connect and discuss AI/ML projects!</p>
+                </div>
+                <div class="card">
+                    <h3>💼 LinkedIn</h3>
+                    <p>linkedin.com/in/Mahendra-Origanti</p>
+                    <p>Connect with me on LinkedIn for professional networking and career opportunities.</p>
+                </div>
+                <div class="card">
+                    <h3>🐱 GitHub</h3>
+                    <p>github.com/Mahendra733</p>
+                    <p>Check out my AI/ML projects, contributions, and innovative solutions in artificial intelligence.</p>
+                </div>
+                <div class="card">
+                    <h3>📱 Phone</h3>
+                    <p>+91 8106368273</p>
+                    <p>Available for calls and discussions about AI/ML projects, internships, and collaboration opportunities.</p>
+                </div>
+                <div class="card">
+                    <h3>🌐 Portfolio Website</h3>
+                    <p>yourwebsite.com</p>
+                    <p>Visit my personal website for detailed project showcases and latest updates on my work.</p>
+                </div>
+                <div class="card">
+                    <h3>📍 Location</h3>
+                    <p>Vijayawada, Andhra Pradesh, India</p>
+                    <p>Open to remote opportunities and local meetups in the AI/ML and tech community.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navigation functionality
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section with animation
+            setTimeout(() => {
+                document.getElementById(sectionId).classList.add('active');
+                
+                // Animate progress bars when about section is shown
+                if (sectionId === 'about') {
+                    setTimeout(animateProgressBars, 300);
+                }
+            }, 100);
+            
+            // Close mobile menu if open
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Animate progress bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress');
+            progressBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width + '%';
+            });
+        }
+
+        // Create floating particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const size = Math.random() * 5 + 2;
+            const startPosition = Math.random() * window.innerWidth;
+            const duration = Math.random() * 3 + 3;
+            
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = startPosition + 'px';
+            particle.style.animationDuration = duration + 's';
+            
+            document.body.appendChild(particle);
+            
+            // Remove particle after animation
+            setTimeout(() => {
+                particle.remove();
+            }, duration * 1000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 500);
+
+        // Smooth scrolling for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize progress bars animation on page load if about section is active
+            if (document.getElementById('about').classList.contains('active')) {
+                setTimeout(animateProgressBars, 1000);
+            }
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(0, 0, 0, 0.9)';
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
